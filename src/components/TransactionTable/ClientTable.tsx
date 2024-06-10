@@ -59,6 +59,63 @@ import {
 import { useRouter } from "next/navigation";
 import { formatDate } from "@/lib/utils";
 
+const DisputeCell = ({ row }) => {
+    const [disputeValue, setDisputeValue] = useState("");
+    const router = useRouter();
+
+    if (row.original.disputed) {
+        return (<p>{row.original.disputed}</p>);
+    }
+
+    return (
+        <Dialog>
+            <DialogTrigger asChild>
+                <Button
+                    variant="secondary"
+                >
+                    Dispute
+                </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+                <DialogHeader>
+                    <DialogTitle>Dispute Purchase</DialogTitle>
+                    <DialogDescription>
+                        Please speficy a reason why you wish to dispute the following purchase
+                    </DialogDescription>
+                </DialogHeader>
+                <form action={() => { DisputeTransaction(row.original.id, disputeValue); router.refresh() }} className="pt-4 space-y-8">
+                    <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="name" className="text-right">
+                            Reason
+                        </Label>
+                        <Input id="name" className="col-span-3" onChange={(e) => { setDisputeValue(e.target.value) }} />
+                    </div>
+                    <div className="flex justify-end">
+                        <DialogClose asChild>
+                            <Button disabled={disputeValue == ""} type="submit">Save changes</Button>
+                        </DialogClose>
+                    </div>
+                </form>
+            </DialogContent>
+        </Dialog>
+    );
+}
+
+const ActionsCell = ({ row }) => {
+    const router = useRouter();
+    
+    const onclick = () => {
+        DeleteTransaction(row.original.id);
+        router.refresh()
+    }
+
+    return (
+        <Button onClick={onclick} variant="ghost" className="h-8 w-8 p-0 outline-none focus-visible:ring-0">
+            <Cross2Icon className="h-4 w-4"/>
+        </Button>
+    )
+}
+
 var columns: ColumnDef<Payment>[] = [
     {
         accessorKey: "date",
@@ -116,65 +173,12 @@ var columns: ColumnDef<Payment>[] = [
     {
         accessorKey: "disputed",
         header: "Disputed",
-        cell: ({ row }) => {
-            const [disputeValue, setDisputeValue] = useState("");
-            const router = useRouter();
-
-            if (row.original.disputed) {
-                return (<p>{row.original.disputed}</p>);
-            }
-
-            return (
-                <Dialog>
-                    <DialogTrigger asChild>
-                        <Button
-                            variant="secondary"
-                        >
-                            Dispute
-                        </Button>
-                    </DialogTrigger>
-                    <DialogContent className="sm:max-w-[425px]">
-                        <DialogHeader>
-                            <DialogTitle>Dispute Purchase</DialogTitle>
-                            <DialogDescription>
-                                Please speficy a reason why you wish to dispute the following purchase
-                            </DialogDescription>
-                        </DialogHeader>
-                        <form action={() => { DisputeTransaction(row.original.id, disputeValue); router.refresh() }} className="pt-4 space-y-8">
-                            <div className="grid grid-cols-4 items-center gap-4">
-                                <Label htmlFor="name" className="text-right">
-                                    Reason
-                                </Label>
-                                <Input id="name" className="col-span-3" onChange={(e) => { setDisputeValue(e.target.value) }} />
-                            </div>
-                            <div className="flex justify-end">
-                                <DialogClose asChild>
-                                    <Button disabled={disputeValue == ""} type="submit">Save changes</Button>
-                                </DialogClose>
-                            </div>
-                        </form>
-                    </DialogContent>
-                </Dialog>
-            );
-        }
+        cell: DisputeCell,
     },
     {
         id: "actions",
         header: "Delete",
-        cell: ({ row }) => {
-            const router = useRouter();
-            
-            const onclick = () => {
-                DeleteTransaction(row.original.id);
-                router.refresh()
-            }
-
-            return (
-                <Button onClick={onclick} variant="ghost" className="h-8 w-8 p-0 outline-none focus-visible:ring-0">
-                    <Cross2Icon className="h-4 w-4"/>
-                </Button>
-            )
-        },
+        cell: ActionsCell,
     },
 ]
 
