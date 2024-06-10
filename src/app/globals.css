@@ -2,32 +2,53 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+@layer base {
+    @layer base {
+        :root {
+            /* Name: custom color palette
+                Author: Ilias Ism
+                URL: https://gradient.page */
+        
+            /* CSS: .bg-gradient { background: var(--gradient) } */
+            --gradient: #16BFFD;
+        
+            --background: 208 63.699999999999996% 4.32%;
+            --foreground: 208 9.8% 97.7%;
+        
+            --muted: 208 34.3% 18.900000000000002%;
+            --muted-foreground: 208 9.8% 55.4%;
+        
+            --popover: 208 42.46% 8.64%;
+            --popover-foreground: 208 9.8% 97.7%;
+        
+            --card: 208 42.46% 8.64%;
+            --card-foreground: 208 9.8% 97.7%;
+        
+            --border: 208 34.3% 18.900000000000002%;
+            --input: 208 34.3% 18.900000000000002%;
+        
+            --primary: 208 98% 54%;
+            --primary-foreground: 208 9.8% 5.4%;
+        
+            --secondary: 208 34.3% 18.900000000000002%;
+            --secondary-foreground: 208 9.8% 97.7%;
+        
+            --accent: 208 34.3% 18.900000000000002%;
+            --accent-foreground: 208 9.8% 97.7%;
+        
+            --destructive: 0 62.8% 30.6%;
+            --destructive-foreground: 208 9.8% 97.7%;
+        
+            --ring: 208 98% 54%;
+        }
+    }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+@layer base {
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
 }
