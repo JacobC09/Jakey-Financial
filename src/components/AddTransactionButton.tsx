@@ -33,7 +33,7 @@ export default function AddTransactionButton() {
     const form = useForm();
     const router = useRouter();
 
-    const onSubmit = (data) => {
+    const onSubmit = (data: any) => {
         AddTransaction(data.name, data.description, parseInt(data.cost));
         form.reset();
         router.refresh();

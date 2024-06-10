@@ -21,9 +21,9 @@ import { redirect } from "next/navigation";
 
 export default function Login() {
     const [isPending, startTransition] = useTransition();
-    const [inputState, setInputState] = useState();
-    const [showPassword, setShowPassword] = useState(false);
-    const [error, setError] = useState("");
+    const [inputState, setInputState] = useState<string>();
+    const [showPassword, setShowPassword] = useState<boolean>(false);
+    const [error, setError] = useState<string>("");
 
     const onSubmit = async (formData: FormData) => {
         startTransition(async () => {
