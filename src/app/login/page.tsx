@@ -31,7 +31,7 @@ export default function Login() {
             const res = await login(password);
             
             if (res?.error != undefined) {
-                setError(res.error);
+                setError("Invalid Password");
             } else {
                 setError("");
                 redirect("/");
