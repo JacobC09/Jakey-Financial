@@ -56,7 +56,7 @@ export default function Login() {
                                     <Input 
                                         type={showPassword ? "text" : "password"} 
                                         name="password" placeholder="Enter password" 
-                                        onCheckedChange ={(e) => {setInputState(e.target.value)}} 
+                                        onChange ={(e) => {setInputState(e.target.value)}} 
                                     />
                                     {error && <p className="text-sm text-destructive" >{error}</p>}
                                 </div>
