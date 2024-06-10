@@ -23,7 +23,7 @@ export default function Login() {
     const [isPending, startTransition] = useTransition();
     const [inputState, setInputState] = useState();
     const [showPassword, setShowPassword] = useState(false);
-    const [error, setError] = useState();
+    const [error, setError] = useState("");
 
     const onSubmit = async (formData: FormData) => {
         startTransition(async () => {
