@@ -69,7 +69,7 @@ export default function AddTransactionButton() {
                                     <FormItem>
                                         <Label>Name</Label>
                                         <FormControl>
-                                            <Input placeholder="shadcn" {...field} />
+                                            <Input placeholder="Name" {...field} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -85,7 +85,7 @@ export default function AddTransactionButton() {
                                     <FormItem>
                                         <Label>Description</Label>
                                         <FormControl>
-                                            <Input placeholder="shadcn" {...field} />
+                                            <Input placeholder="Description" {...field} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
