@@ -77,7 +77,6 @@ const DateCell = ({ row }) => {
                 <Calendar
                     mode="default"
                     selected={row.original.date}
-                    disableNavigation={true}
                     initialFocus={true}
                     className="rounded-md border shadow"
                 />
