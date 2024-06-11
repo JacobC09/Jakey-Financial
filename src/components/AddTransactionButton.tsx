@@ -53,7 +53,7 @@ export default function AddTransactionButton() {
                     <DialogHeader>
                         <DialogTitle>Add Transaction</DialogTitle>
                         <DialogDescription>
-                            Please specify a reason why you wish to dispute the following purchase
+                            Please complete for following form to add a new transaction record
                         </DialogDescription>
                     </DialogHeader>
 
