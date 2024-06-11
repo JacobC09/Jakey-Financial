@@ -26,6 +26,7 @@ import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Calendar } from "@/components/ui/calendar"
 
 import {
     DropdownMenu,
@@ -56,8 +57,34 @@ import {
     DialogTrigger,
     DialogClose
 } from "@/components/ui/dialog"
+
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover"
+
 import { useRouter } from "next/navigation";
 import { formatDate } from "@/lib/utils";
+
+const DateCell = ({ row }) => {
+    return (
+        <Popover>
+            <PopoverTrigger asChild>
+                <Button variant="ghost">{formatDate(row.original.date)}</Button>
+            </PopoverTrigger>
+            <PopoverContent className="p-0 border-none">
+                <Calendar
+                    mode="default"
+                    selected={row.original.date}
+                    disableNavigation={true}
+                    initialFocus={true}
+                    className="rounded-md border shadow"
+                />
+            </PopoverContent>
+        </Popover>
+    );
+}
 
 const DisputeCell = ({ row }) => {
     const [disputeValue, setDisputeValue] = useState("");
@@ -103,7 +130,7 @@ const DisputeCell = ({ row }) => {
 
 const ActionsCell = ({ row }) => {
     const router = useRouter();
-    
+
     const onclick = () => {
         DeleteTransaction(row.original.id);
         router.refresh()
@@ -111,7 +138,7 @@ const ActionsCell = ({ row }) => {
 
     return (
         <Button onClick={onclick} variant="ghost" className="h-8 w-8 p-0 outline-none focus-visible:ring-0">
-            <Cross2Icon className="h-4 w-4"/>
+            <Cross2Icon className="h-4 w-4" />
         </Button>
     )
 }
@@ -130,9 +157,7 @@ var columns: ColumnDef<Payment>[] = [
                 </Button>
             );
         },
-        cell: ({ row }) => (
-            <div className="capitalize">{formatDate(row.original.date)}</div>
-        ),
+        cell: DateCell,
     },
     {
         accessorKey: "name",

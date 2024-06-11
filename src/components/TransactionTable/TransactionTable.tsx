@@ -7,6 +7,12 @@ export default async function TransactionTable() {
     const data = await GetTransactions();
     const session = await getSession();
 
+    const total = data.map((transaction) => transaction.cost).reduce((a, b) => a + b)
+    const formatted = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "CAD",
+    }).format(total)
+
     return (
         <>
             {
@@ -21,6 +27,10 @@ export default async function TransactionTable() {
             }
             {session.data.admin && <AddTransactionButton />}
             <ClientTable data={data} admin={session.data.admin} />
+            
+            <p className="py-2 text-lg font-bold">
+                Total: <span className="text-primary">{formatted}</span>
+            </p>
         </>
     );
 }
