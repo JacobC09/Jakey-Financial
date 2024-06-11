@@ -34,7 +34,7 @@ export default function AddTransactionButton() {
     const router = useRouter();
 
     const onSubmit = (data: any) => {
-        AddTransaction(data.name, data.description, parseInt(data.cost));
+        AddTransaction(data.name, data.description, parseFloat(data.cost));
         form.reset();
         router.refresh();
     }
@@ -51,7 +51,7 @@ export default function AddTransactionButton() {
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[425px]">
                     <DialogHeader>
-                        <DialogTitle>Dispute Purchase</DialogTitle>
+                        <DialogTitle>Add Transaction</DialogTitle>
                         <DialogDescription>
                             Please specify a reason why you wish to dispute the following purchase
                         </DialogDescription>

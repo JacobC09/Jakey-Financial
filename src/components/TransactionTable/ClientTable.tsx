@@ -176,7 +176,7 @@ var columns: ColumnDef<Payment>[] = [
         cell: DisputeCell,
     },
     {
-        id: "actions",
+        id: "Delete",
         header: "Delete",
         cell: ActionsCell,
     },
