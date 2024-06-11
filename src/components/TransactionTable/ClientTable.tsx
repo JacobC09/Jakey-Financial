@@ -77,7 +77,8 @@ const DateCell = ({ row }) => {
                 <Calendar
                     mode="default"
                     selected={row.original.date}
-                    initialFocus={true}
+                    defaultMonth={row.original.date} 
+                    disableNavigation={true}
                     className="rounded-md border shadow"
                 />
             </PopoverContent>
